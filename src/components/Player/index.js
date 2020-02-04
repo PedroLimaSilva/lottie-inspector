@@ -24,7 +24,6 @@ export class Player extends React.Component {
     });
     this.animation.setSubframe(false);
     this.animation.addEventListener("enterFrame", e => {
-      console.log(e);
       this.setState({ currentFrame: e.currentTime, maxFrames: e.totalTime-1 });
     });
   }
