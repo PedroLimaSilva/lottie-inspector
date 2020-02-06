@@ -23,6 +23,7 @@ export class Player extends React.Component {
       path: "./data.json"
     });
     this.animation.setSubframe(false);
+    this.animation.setSpeed(1);
     this.animation.addEventListener("enterFrame", e => {
       this.setState({ currentFrame: e.currentTime, maxFrames: e.totalTime-1 });
     });

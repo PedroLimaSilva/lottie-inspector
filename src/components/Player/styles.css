@@ -4,3 +4,13 @@
   left: 0;
   right: 0;
 }
+
+#bm{
+  text-align: center;
+}
+
+#bm svg {
+  width: 100vw !important;
+  height: 100vh !important;
+  display: inline-block;
+}
