@@ -11,7 +11,8 @@ export class Player extends React.Component {
   state = {
     playing: true,
     currentFrame: 0,
-    maxFrames: 1
+    maxFrames: 1,
+    duration: 0
   };
 
   componentDidMount() {
@@ -25,7 +26,10 @@ export class Player extends React.Component {
     this.animation.setSubframe(false);
     this.animation.setSpeed(1);
     this.animation.addEventListener("enterFrame", e => {
-      this.setState({ currentFrame: e.currentTime, maxFrames: e.totalTime-1 });
+      this.setState({
+        currentFrame: e.currentTime,
+        maxFrames: e.totalTime - 1
+      });
     });
   }
 
@@ -35,7 +39,10 @@ export class Player extends React.Component {
     } else {
       this.animation.pause();
     }
-    this.setState({ playing: !this.state.playing });
+    this.setState({
+      playing: !this.state.playing,
+      duration: this.animation.getDuration()
+    });
   };
 
   setFrame = ({ target: { value } }) => {
@@ -46,12 +53,13 @@ export class Player extends React.Component {
   };
 
   render() {
-    const { currentFrame, maxFrames } = this.state;
+    const { currentFrame, maxFrames, duration } = this.state;
     return (
       <div>
         <div id="bm" />
         <div className="controls">
           <button onClick={this.playPause}>Play/Pause</button>
+          <span>{duration}s</span>
           <input
             type="range"
             min="0"
