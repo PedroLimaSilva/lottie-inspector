@@ -20,7 +20,7 @@ export class Player extends React.Component {
       container: document.getElementById("bm"),
       renderer: "svg",
       loop: true,
-      autoplay: this.state.playing,
+      autoplay: true,
       path: "./data.json"
     });
     this.animation.setSubframe(false);
