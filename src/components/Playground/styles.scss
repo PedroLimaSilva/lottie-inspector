@@ -1,0 +1,125 @@
+.playground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  * {
+    pointer-events: all;
+  }
+}
+
+.images {
+  position: absolute;
+  top: 0;
+  left: 0;
+  .flip {
+    transform: scaleX(-1);
+  }
+}
+
+$arch-deg: 90;
+$n-arches: 360 / $arch-deg;
+
+@mixin arches {
+  @for $index from 0 to $n-arches {
+    .c#{$index} {
+      animation-name: rotate-c#{$index};
+    }
+  }
+}
+
+@mixin arches-rotations {
+  @for $index from 0 to $n-arches {
+    @keyframes rotate-c#{$index} {
+      0% {
+        transform: rotate(0);
+      }
+      50% {
+        transform: rotate($arch-deg * $index * 1deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  }
+}
+
+.secondary-spinner-component {
+  height: 320px;
+  width: 320px;
+  position: relative;
+  animation: rotate-all linear 4s 0s infinite forwards,
+    change-color linear 12s 0s infinite forwards;
+  border-color: #fe8f00;
+  .corner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 50%;
+    overflow: hidden;
+    transform-origin: right bottom;
+    transform: rotate(0);
+    animation: linear 1.5s 0s infinite forwards;
+    border-color: inherit;
+    &:after {
+      display: block;
+      content: "";
+      height: 200%;
+      width: 200%;
+      border: 28px solid #fe8f00;
+      border-color: inherit;
+      border-radius: 50%;
+      box-sizing: border-box;
+    }
+  }
+  @include arches;
+  @include arches-rotations;
+}
+
+@keyframes rotate-all {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes change-color {
+  0% {
+    border-color: #fe8f00;
+  }
+  5% {
+    border-color: #fdcd01;
+  }
+  10% {
+    border-color: #00a490;
+  }
+  15% {
+    border-color: #009ce3;
+  }
+  20% {
+    border-color: #f20a3c;
+  }
+  25% {
+    border-color: #0a94e2;
+  }
+  30% {
+    border-color: #029be2;
+  }
+  35% {
+    border-color: #c5255b;
+  }
+  40% {
+    border-color: #fe8f00;
+  }
+  45% {
+    border-color: #fdcd01;
+  }
+}
